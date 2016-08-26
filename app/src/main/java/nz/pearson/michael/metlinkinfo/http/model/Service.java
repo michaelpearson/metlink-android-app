@@ -121,6 +121,10 @@ public class Service {
         return displayDeparture;
     }
 
+    public int getSeconds() {
+        return displayDepartureSeconds;
+    }
+
     public String getDisplayDepartureSeconds() {
         int seconds = displayDepartureSeconds;
         int minutes = seconds / 60;

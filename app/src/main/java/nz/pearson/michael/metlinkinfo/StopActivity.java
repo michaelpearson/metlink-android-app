@@ -9,6 +9,9 @@ import android.widget.ListView;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import nz.pearson.michael.metlinkinfo.http.StopInfo;
 import nz.pearson.michael.metlinkinfo.http.model.Service;
 import nz.pearson.michael.metlinkinfo.http.model.ServiceAdapter;
@@ -41,6 +44,12 @@ public class StopActivity extends AppCompatActivity {
         new StopInfo(null).getStopInformation(serviceId, new StopInfo.DataReady() {
             @Override
             public void ready(Service[] services) {
+                Arrays.sort(services, new Comparator<Service>() {
+                    @Override
+                    public int compare(Service service, Service t1) {
+                        return service.getSeconds() > t1.getSeconds() ? 1 : -1;
+                    }
+                });
                 serviceInformationAdapter.addAll(services);
                 serviceInformationAdapter.notifyDataSetChanged();
             }
